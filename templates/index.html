@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 DefenceX - Call Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background Styling */
+        body {
+            background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Container Box */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 35px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Custom File Upload */
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333; /* Darker text for visibility */
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for better visibility */
+        }
+
+        .file-upload-wrapper:hover {
+            background-color: #f5f5f5;
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #666; /* Slightly darker gray for contrast */
+            opacity: 0.9;
+        }
+
+        /* Dropdown & Button */
+        select, button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        select {
+            background: #ffffff;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        button {
+            background: #ff4b2b;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #ff6f47;
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 10px rgba(255, 75, 43, 0.4);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            color: black;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: #ff4b2b;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 DefenceX - Call Analysis</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="fileInput" class="file-upload-wrapper">
+                📂 Upload Audio File
+                <input type="file" name="file" id="fileInput" required>
+                <span id="fileName" class="file-name">No file selected</span>
+            </label>
+
+            <label for="language">🌍 Select Language:</label>
+            <select name="language">
+                <!-- Indian Languages -->
+                <option value="en-US">English</option>
+                <option value="hi-IN">Hindi</option>
+                <option value="mr-IN">Marathi</option>
+                <option value="bn-IN">Bengali</option>
+                <option value="gu-IN">Gujarati</option>
+                <option value="kn-IN">Kannada</option>
+                <option value="ml-IN">Malayalam</option>
+                <option value="pa-IN">Punjabi</option>
+                <option value="ta-IN">Tamil</option>
+                <option value="te-IN">Telugu</option>
+                <option value="ur-IN">Urdu</option>
+                <option value="or-IN">Odia</option>
+                <option value="as-IN">Assamese</option>
+            
+                <!-- Other Languages -->
+                <option value="es-ES">Spanish</option>
+                <option value="fr-FR">French</option>
+                <option value="de-DE">German</option>
+                <option value="zh-CN">Chinese (Mandarin)</option>
+                <option value="ja-JP">Japanese</option>
+                <option value="ar-SA">Arabic</option>
+                <option value="ru-RU">Russian</option>
+                <option value="it-IT">Italian</option>
+                <option value="pt-PT">Portuguese</option>
+                <option value="ko-KR">Korean</option>
+                <option value="nl-NL">Dutch</option>
+                <option value="tr-TR">Turkish</option>
+                <option value="vi-VN">Vietnamese</option>
+                <option value="th-TH">Thai</option>
+                <option value="pl-PL">Polish</option>
+                <option value="sv-SE">Swedish</option>
+                <option value="fi-FI">Finnish</option>
+                <option value="da-DK">Danish</option>
+                <option value="no-NO">Norwegian</option>
+                <option value="cs-CZ">Czech</option>
+                <option value="hu-HU">Hungarian</option>
+                <option value="el-GR">Greek</option>
+            </select>
+            
+            <button type="submit">🚀 Analyze</button>
+        </form>
+    </div>
+
+    {% if transcript %}
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Transcription Result:</h2>
+                <p>{{ transcript }}</p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let modal = document.getElementById("resultModal");
+                let closeBtn = document.querySelector(".close");
+
+                modal.style.display = "flex";
+
+                closeBtn.onclick = function() {
+                    modal.style.display = "none";
+                };
+
+                window.onclick = function(event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            });
+
+            document.getElementById('fileInput').addEventListener('change', function(event) {
+                const fileName = event.target.files[0]?.name || 'No file selected';
+                document.getElementById('fileName').textContent = fileName;
+            });
+        </script>
+    {% endif %}
+</body>
+</html>
